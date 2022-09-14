@@ -1,11 +1,14 @@
 ### List games
 GET http://localhost:3333/games
 
+### Get game by Id
+GET http://localhost:3333/games/18122
+
 ### List ads
 GET http://localhost:3333/ads
 
 ### Create Ad
-POST http://localhost:3333/games/e03d8f1e-1caa-4b40-81ea-2bdc6e999113/ads
+POST http://localhost:3333/games/18122/ads
 Content-Type: application/json
 
 {
@@ -19,7 +22,7 @@ Content-Type: application/json
 }
 
 ### List ads by gameId
-GET http://localhost:3333/games/45e71933-4749-48b0-9571-eebd370693d2/ads
+GET http://localhost:3333/games/18122/ads
 
 ### Get discord by adId
-GET http://localhost:3333/ads/d693e755-4998-45f3-b307-7f6f41dd48ca/discord
+GET http://localhost:3333/ads/7485ce83-1fc6-4c10-85fb-91a615e158ca/discord

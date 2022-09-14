@@ -13,6 +13,14 @@
 ### 📚 bibliotecas adicionais 🗃️
 
 - cors
+- axios
+- form-data
+
+## ➕ O que fiz além ✨
+
+- Autenticação na Twitch
+- Buscar top 10 games da Twitch
+- Buscar game por ID na Twitch
 
 ## 📃 Guia 📖
 
@@ -62,6 +70,10 @@
 - iniciando o prisma no projeto com SQLite: npx prisma init --datasource-provider SQLite
 - criar migration: npx prisma migrate dev
 - instalando o prisma client: npm i @prisma/client
+
+### Twitch API
+
+- https://dev.twitch.tv/docs/api/get-started
 
 ## 🔗 Links úteis ✨
 
