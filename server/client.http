@@ -1,1 +1,25 @@
-GET http://localhost:3333/ads HTTP/1.1
+### List games
+GET http://localhost:3333/games
+
+### List ads
+GET http://localhost:3333/ads
+
+### Create Ad
+POST http://localhost:3333/games/e03d8f1e-1caa-4b40-81ea-2bdc6e999113/ads
+Content-Type: application/json
+
+{
+  "name": "WolfDolf",
+  "yearsPlaying": 1,
+  "discord": "Rodolfo H Okino#5186",
+  "weekDays": [0,5,6],
+  "hourStart": "21:00",
+  "hourEnd" : "23:30",
+  "useVoiceChannel": false
+}
+
+### List ads by gameId
+GET http://localhost:3333/games/45e71933-4749-48b0-9571-eebd370693d2/ads
+
+### Get discord by adId
+GET http://localhost:3333/ads/d693e755-4998-45f3-b307-7f6f41dd48ca/discord
