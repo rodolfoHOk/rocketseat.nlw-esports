@@ -12,6 +12,7 @@
 ### 📚 bibliotecas adicionais 🗃️
 
 - phosphor-react : Uma família de ícones limpa e amigável para React
+- @radix-ui/react-dialog
 
 ## 📃 Iniciando o projeto 📖
 
@@ -28,3 +29,5 @@
 ## 🔗 Links úteis ✨
 
 - https://tailwindcss.com/docs/installation/using-postcss
+
+- https://www.radix-ui.com/docs/primitives/components/dialog
