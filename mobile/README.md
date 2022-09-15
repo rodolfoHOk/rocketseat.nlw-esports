@@ -23,6 +23,8 @@
 - https://docs.expo.dev/guides/using-custom-fonts/#using-a-google-font
 - https://reactnavigation.org/docs/getting-started
 - https://docs.expo.dev/versions/latest/sdk/linear-gradient/
+- https://docs.expo.dev/versions/latest/sdk/svg/
+- https://github.com/duongdev/phosphor-react-native
 
 #### Aula 1: LevelUp
 
@@ -30,6 +32,6 @@
 
 #### Aula 3: UntilTheEnd
 
-#### Aula 4:
+#### Aula 4: ProPlayer
 
 #### Aula 5:
