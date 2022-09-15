@@ -12,13 +12,13 @@ POST http://localhost:3333/games/21779/ads
 Content-Type: application/json
 
 {
-  "name": "WolfDolf",
-  "yearsPlaying": 1,
-  "discord": "Rodolfo H Okino#5186",
+  "name": "DiegoWW",
+  "yearsPlaying": 2,
+  "discord": "Diego Fernandes#1234",
   "weekDays": [0,5,6],
-  "hourStart": "21:00",
-  "hourEnd" : "23:30",
-  "useVoiceChannel": false
+  "hourStart": "19:00",
+  "hourEnd" : "22:30",
+  "useVoiceChannel": true
 }
 
 ### List ads by gameId

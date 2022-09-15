@@ -1,191 +1,26 @@
 import express from 'express';
 import cors from 'cors';
-import { convertHourStringToMinutes } from './utils/convert-hour-string-to-minutes';
-import { convertMinutesToHourString } from './utils/convert-minutes-to-hour-string';
-import { GetTwitchTopGamesService } from './twitch/get-twitch-top-games-service';
-import { AuthenticateTwitchService } from './twitch/authenticate-twitch-service';
-import { convertTwitchGamesToGames } from './utils/convert-twitch-games-to-games';
-import { GetTwitchGameByIdService } from './twitch/get-twitch-game-by-id-service';
-import { convertTwitchGameToGame } from './utils/convert-twitch-game-to-game';
-import { prisma } from './prisma';
-import { CountAdsByGameService } from './services/count-ads-by-game-service';
+import { ListTwitchTopGamesController } from './controllers/list-twitch-top-games-controller';
+import { GetTwitchGameByIdController } from './controllers/get-twitch-game-by-id-controller';
+import { CreateAdController } from './controllers/create-ad-controller';
+import { ListAdsController } from './controllers/list-ads-controller';
+import { ListAdsByGameIdController } from './controllers/list-ads-by-game-id-controller';
+import { GetDiscordByAdIdController } from './controllers/get-discord-by-ad-id-controller';
 
 const app = express();
 app.use(express.json());
 app.use(cors());
 
-app.get('/games', async (request, response) => {
-  const getTwitchTopGamesService = new GetTwitchTopGamesService();
-  try {
-    const topGamesResponse = await getTwitchTopGamesService.execute();
-    const topGames = convertTwitchGamesToGames(topGamesResponse);
-    const countAdsByGame = new CountAdsByGameService();
-    const topGamesWithCountAds = await Promise.all(
-      topGames.map(async (game) => ({
-        ...game,
-        adsCount: await countAdsByGame.execute(game.id),
-      }))
-    );
-    return response.json(topGamesWithCountAds);
-  } catch (err: any) {
-    if (err.response && err.response.data.status === 401) {
-      const authenticateTwitchService = new AuthenticateTwitchService();
-      try {
-        await authenticateTwitchService.execute();
-        const topGamesResponse = await getTwitchTopGamesService.execute();
-        const topGames = convertTwitchGamesToGames(topGamesResponse);
-        const countAdsByGame = new CountAdsByGameService();
-        const topGamesWithCountAds = await Promise.all(
-          topGames.map(async (game) => ({
-            ...game,
-            adsCount: await countAdsByGame.execute(game.id),
-          }))
-        );
-        return response.json(topGamesWithCountAds);
-      } catch (e: any) {
-        return response.status(500).json(e.response.data);
-      }
-    } else {
-      return response.status(500).json(err);
-    }
-  }
-});
+app.get('/games', new ListTwitchTopGamesController().handle);
 
-app.get('/games/:id', async (request, response) => {
-  const { id } = request.params;
-  const getTwitchGameByIdService = new GetTwitchGameByIdService();
-  try {
-    const twitchGameResponse = await getTwitchGameByIdService.execute(id);
-    return response.json(convertTwitchGameToGame(twitchGameResponse));
-  } catch (err: any) {
-    if (err.response && err.response.data.status === 401) {
-      const authenticateTwitchService = new AuthenticateTwitchService();
-      try {
-        await authenticateTwitchService.execute();
-        const twitchGameResponse = await getTwitchGameByIdService.execute(id);
-        return response.json(convertTwitchGameToGame(twitchGameResponse));
-      } catch (e: any) {
-        return response.status(500).json(e.response.data);
-      }
-    } else {
-      return response.status(500).json(err);
-    }
-  }
-});
+app.get('/games/:id', new GetTwitchGameByIdController().handle);
 
-app.get('/ads', async (request, response) => {
-  const ads = await prisma.ad.findMany();
+app.post('/games/:id/ads', new CreateAdController().handle);
 
-  return response.json(ads);
-});
+app.get('/games/:id/ads', new ListAdsByGameIdController().handle);
 
-app.post('/games/:id/ads', async (request, response) => {
-  const gameId: any = request.params.id;
-  const body: any = request.body;
+app.get('/ads', new ListAdsController().handle);
 
-  const game = await prisma.game.findUnique({
-    where: {
-      id: gameId,
-    },
-  });
-
-  if (game === null) {
-    const getTwitchGameByIdService = new GetTwitchGameByIdService();
-    try {
-      const twitchGameResponse = await getTwitchGameByIdService.execute(gameId);
-      const gameToCreate = convertTwitchGameToGame(twitchGameResponse);
-      await prisma.game.create({
-        data: gameToCreate,
-      });
-    } catch (err: any) {
-      if (err.response && err.response.data.status === 401) {
-        const authenticateTwitchService = new AuthenticateTwitchService();
-        try {
-          await authenticateTwitchService.execute();
-          const twitchGameResponse = await getTwitchGameByIdService.execute(
-            gameId
-          );
-          const gameToCreate = convertTwitchGameToGame(twitchGameResponse);
-          await prisma.game.create({
-            data: gameToCreate,
-          });
-        } catch (e: any) {
-          return response.status(500).json(e.response.data);
-        }
-      } else {
-        return response.status(500).json(err);
-      }
-    }
-  }
-
-  const ad = await prisma.ad.create({
-    data: {
-      gameId,
-      name: body.name,
-      yearsPlaying: body.yearsPlaying,
-      weekDays: body.weekDays.join(','),
-      hourStart: convertHourStringToMinutes(body.hourStart),
-      hourEnd: convertHourStringToMinutes(body.hourEnd),
-      discord: body.discord,
-      useVoiceChannel: body.useVoiceChannel,
-    },
-  });
-
-  return response.status(201).json(ad);
-});
-
-app.get('/games/:id/ads', async (request, response) => {
-  const gameId = request.params.id;
-
-  const ads = await prisma.ad.findMany({
-    select: {
-      id: true,
-      name: true,
-      weekDays: true,
-      hourStart: true,
-      hourEnd: true,
-      yearsPlaying: true,
-      useVoiceChannel: true,
-    },
-    where: {
-      gameId,
-    },
-    orderBy: {
-      createdAt: 'desc',
-    },
-  });
-
-  return response.json(
-    ads.map((ad) => {
-      return {
-        ...ad,
-        weekDays: ad.weekDays.split(','),
-        hourStart: convertMinutesToHourString(ad.hourStart),
-        hourEnd: convertMinutesToHourString(ad.hourEnd),
-      };
-    })
-  );
-});
-
-app.get('/ads/:id/discord', async (request, response) => {
-  const adId = request.params.id;
-
-  try {
-    const ad = await prisma.ad.findUniqueOrThrow({
-      select: {
-        discord: true,
-      },
-      where: {
-        id: adId,
-      },
-    });
-
-    return response.json({
-      discord: ad.discord,
-    });
-  } catch (e) {
-    return response.status(404).send();
-  }
-});
+app.get('/ads/:id/discord', new GetDiscordByAdIdController().handle);
 
 app.listen(3333, () => console.log('Server is running on port: 3333'));
