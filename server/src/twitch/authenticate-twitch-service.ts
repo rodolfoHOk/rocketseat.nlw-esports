@@ -22,5 +22,7 @@ export class AuthenticateTwitchService {
     });
 
     twitchClient.defaults.headers.common.Authorization = `Bearer ${accessTokenResponse.access_token}`;
+    twitchClient.defaults.headers.common['Client-Id'] = process.env
+      .TWITCH_CLIENT_ID as string;
   }
 }

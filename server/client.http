@@ -8,7 +8,7 @@ GET http://localhost:3333/games/18122
 GET http://localhost:3333/ads
 
 ### Create Ad
-POST http://localhost:3333/games/18122/ads
+POST http://localhost:3333/games/21779/ads
 Content-Type: application/json
 
 {

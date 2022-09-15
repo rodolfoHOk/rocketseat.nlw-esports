@@ -1,5 +1,4 @@
 import express from 'express';
-import { PrismaClient } from '@prisma/client';
 import cors from 'cors';
 import { convertHourStringToMinutes } from './utils/convert-hour-string-to-minutes';
 import { convertMinutesToHourString } from './utils/convert-minutes-to-hour-string';
@@ -8,32 +7,46 @@ import { AuthenticateTwitchService } from './twitch/authenticate-twitch-service'
 import { convertTwitchGamesToGames } from './utils/convert-twitch-games-to-games';
 import { GetTwitchGameByIdService } from './twitch/get-twitch-game-by-id-service';
 import { convertTwitchGameToGame } from './utils/convert-twitch-game-to-game';
+import { prisma } from './prisma';
+import { CountAdsByGameService } from './services/count-ads-by-game-service';
 
 const app = express();
 app.use(express.json());
 app.use(cors());
 
-const prisma = new PrismaClient({
-  log: ['query'],
-});
-
 app.get('/games', async (request, response) => {
   const getTwitchTopGamesService = new GetTwitchTopGamesService();
   try {
     const topGamesResponse = await getTwitchTopGamesService.execute();
-    return response.json(convertTwitchGamesToGames(topGamesResponse));
+    const topGames = convertTwitchGamesToGames(topGamesResponse);
+    const countAdsByGame = new CountAdsByGameService();
+    const topGamesWithCountAds = await Promise.all(
+      topGames.map(async (game) => ({
+        ...game,
+        adsCount: await countAdsByGame.execute(game.id),
+      }))
+    );
+    return response.json(topGamesWithCountAds);
   } catch (err: any) {
-    if (err.response.data.status === 401) {
+    if (err.response && err.response.data.status === 401) {
       const authenticateTwitchService = new AuthenticateTwitchService();
       try {
         await authenticateTwitchService.execute();
         const topGamesResponse = await getTwitchTopGamesService.execute();
-        return response.json(convertTwitchGamesToGames(topGamesResponse));
+        const topGames = convertTwitchGamesToGames(topGamesResponse);
+        const countAdsByGame = new CountAdsByGameService();
+        const topGamesWithCountAds = await Promise.all(
+          topGames.map(async (game) => ({
+            ...game,
+            adsCount: await countAdsByGame.execute(game.id),
+          }))
+        );
+        return response.json(topGamesWithCountAds);
       } catch (e: any) {
         return response.status(500).json(e.response.data);
       }
     } else {
-      return response.status(500).json(err.response.data);
+      return response.status(500).json(err);
     }
   }
 });
@@ -45,7 +58,7 @@ app.get('/games/:id', async (request, response) => {
     const twitchGameResponse = await getTwitchGameByIdService.execute(id);
     return response.json(convertTwitchGameToGame(twitchGameResponse));
   } catch (err: any) {
-    if (err.response.data.status === 401) {
+    if (err.response && err.response.data.status === 401) {
       const authenticateTwitchService = new AuthenticateTwitchService();
       try {
         await authenticateTwitchService.execute();
@@ -55,7 +68,7 @@ app.get('/games/:id', async (request, response) => {
         return response.status(500).json(e.response.data);
       }
     } else {
-      return response.status(500).json(err.response.data);
+      return response.status(500).json(err);
     }
   }
 });
@@ -85,7 +98,7 @@ app.post('/games/:id/ads', async (request, response) => {
         data: gameToCreate,
       });
     } catch (err: any) {
-      if (err.response.data.status === 401) {
+      if (err.response && err.response.data.status === 401) {
         const authenticateTwitchService = new AuthenticateTwitchService();
         try {
           await authenticateTwitchService.execute();
@@ -100,7 +113,7 @@ app.post('/games/:id/ads', async (request, response) => {
           return response.status(500).json(e.response.data);
         }
       } else {
-        return response.status(500).json(err.response.data);
+        return response.status(500).json(err);
       }
     }
   }
