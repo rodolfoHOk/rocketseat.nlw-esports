@@ -21,6 +21,7 @@
 - Autenticação na Twitch
 - Buscar top 10 games da Twitch
 - Buscar game por ID na Twitch
+- Refatoração incluindo uma camada de controllers
 
 ## 📃 Guia 📖
 
