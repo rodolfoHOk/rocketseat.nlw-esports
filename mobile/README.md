@@ -7,6 +7,7 @@
 - Javascript / Typescript : Linguagem programação
 - React Native : Biblioteca criação de interfaces mobile
 - Expo : Ferramenta de desenvolvimento mobile com React Native
+- Phosphor Icons for React Native: Biblioteca de ícones
 
 ## 🗃️ Iniciando o projeto 📚
 
@@ -15,6 +16,8 @@
 - iniciando a aplicação: expo start
 - visualizando a aplicação no smartphone: instalar o app expo go no smartphone e
   escanear o qr code que aparece no comando expo start
+
+## Sugestões de melhorias
 
 ## 🖼️ Imagens do projeto 👀
 
@@ -25,6 +28,10 @@
 - https://docs.expo.dev/versions/latest/sdk/linear-gradient/
 - https://docs.expo.dev/versions/latest/sdk/svg/
 - https://github.com/duongdev/phosphor-react-native
+- https://docs.expo.dev/versions/latest/sdk/clipboard/
+- https://docs.expo.dev/versions/latest/sdk/notifications/
+- https://docs.expo.dev/push-notifications/sending-notifications/
+- https://expo.dev/notifications
 
 #### Aula 1: LevelUp
 
@@ -34,4 +41,4 @@
 
 #### Aula 4: ProPlayer
 
-#### Aula 5:
+#### Aula 5: Aprendizado contínuo
