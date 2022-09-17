@@ -27,7 +27,7 @@
   Select a variant: Typescript
 - instalando as dependências do projeto: npm install
 
-## Sugestões de melhoria
+## ➕ Sugestões de melhorias ✨
 
 - responsividade
 - carrousel com biblioteca keen-slider
@@ -35,14 +35,9 @@
 - validação (react-hook-forms)
 - autenticação com discord
 
-## 🖼️ Imagens do projeto 👀
-
 ## 🔗 Links úteis ✨
 
 - https://tailwindcss.com/docs/installation/using-postcss
-
 - https://www.radix-ui.com/docs/primitives/components/dialog
-
 - https://www.radix-ui.com/docs/primitives/components/checkbox
-
 - https://www.radix-ui.com/docs/primitives/components/toggle-group
