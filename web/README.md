@@ -16,6 +16,9 @@
 - @radix-ui/react-checkbox
 - @radix-ui/react-toggle-group
 - axios
+- react-hook-form
+- @hookform/resolvers
+- zod
 
 ## 📃 Iniciando o projeto 📖
 
