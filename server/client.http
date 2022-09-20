@@ -8,7 +8,7 @@ GET http://localhost:3333/games/18122
 GET http://localhost:3333/ads
 
 ### Create Ad
-POST http://localhost:3333/games/21779/ads
+POST http://localhost:3333/games/516575/ads
 Content-Type: application/json
 
 {
@@ -19,6 +19,20 @@ Content-Type: application/json
   "hourStart": "19:00",
   "hourEnd" : "22:30",
   "useVoiceChannel": true
+}
+
+### Create Ad with errors
+POST http://localhost:3333/games/21779/ads
+Content-Type: application/json
+
+{
+  "name": "D",
+  "yearsPlaying": 2.5,
+  "discord": "#1234",
+  "weekDays": [-1,"5",7],
+  "hourStart": "9:00",
+  "hourEnd" : "",
+  "useVoiceChannel": "true"
 }
 
 ### List ads by gameId

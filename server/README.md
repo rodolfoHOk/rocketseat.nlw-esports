@@ -15,6 +15,7 @@
 - cors
 - axios
 - form-data
+- zod
 
 ## ➕ O que fiz além ✨
 
@@ -22,6 +23,7 @@
 - Buscar top 10 games da Twitch
 - Buscar game por ID na Twitch
 - Refatoração incluindo uma camada de controllers
+- Validação dos dados antes de persistir com a biblioteca zod
 
 ## 📃 Guia 📖
 

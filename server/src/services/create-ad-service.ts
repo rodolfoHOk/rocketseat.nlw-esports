@@ -1,4 +1,7 @@
 import { Ad } from '@prisma/client';
+import { AdDto, AdDtoModel } from '../dto/ad-dto';
+import { GameIdDtoModel } from '../dto/game-id-dto';
+import { ValidationError } from '../exceptions/ValidationError';
 import { prisma } from '../prisma';
 import { AuthenticateTwitchService } from '../twitch/authenticate-twitch-service';
 import {
@@ -8,18 +11,14 @@ import {
 import { convertHourStringToMinutes } from '../utils/convert-hour-string-to-minutes';
 import { convertTwitchGameToGame } from '../utils/convert-twitch-game-to-game';
 
-export interface CreateAdDto {
-  name: string;
-  yearsPlaying: number;
-  discord: string;
-  weekDays: number[];
-  hourStart: string;
-  hourEnd: string;
-  useVoiceChannel: boolean;
-}
-
 export class CreateAdService {
-  async execute(gameId: string, ad: CreateAdDto): Promise<Ad> {
+  async execute(gameId: string, ad: AdDto): Promise<Ad> {
+    const gameIdValidate = GameIdDtoModel.safeParse(gameId);
+
+    if (gameIdValidate.success === false) {
+      throw new ValidationError('gameId inválido');
+    }
+
     const game = await prisma.game.findUnique({
       where: {
         id: gameId,
@@ -43,12 +42,17 @@ export class CreateAdService {
         } else {
           throw err;
         }
-
-        const gameToCreate = convertTwitchGameToGame(twitchGameResponse);
-        await prisma.game.create({
-          data: gameToCreate,
-        });
       }
+      const gameToCreate = convertTwitchGameToGame(twitchGameResponse);
+      await prisma.game.create({
+        data: gameToCreate,
+      });
+    }
+
+    const adValidate = AdDtoModel.safeParse(ad);
+
+    if (adValidate.success === false) {
+      throw new ValidationError(adValidate.error.message);
     }
 
     const createdAd = await prisma.ad.create({
