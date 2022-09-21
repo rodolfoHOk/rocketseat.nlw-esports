@@ -15,10 +15,12 @@
 - @radix-ui/react-dialog
 - @radix-ui/react-checkbox
 - @radix-ui/react-toggle-group
+- @radix-ui/react-select
 - axios
 - react-hook-form
 - @hookform/resolvers
 - zod
+- keen-slider
 
 ## 📃 Iniciando o projeto 📖
 
@@ -33,7 +35,7 @@
 ## ➕ Sugestões de melhorias ✨
 
 - responsividade
-- carrousel com biblioteca keen-slider
+- carrousel com biblioteca keen-slider // OK
 - usar radix select para escolha do game // OK
 - validação (react-hook-forms) // OK
 - autenticação com discord
@@ -48,3 +50,4 @@
 - https://github.com/colinhacks/zod
 - https://react-hook-form.com/get-started
 - https://github.com/react-hook-form/resolvers
+- https://keen-slider.io/docs
