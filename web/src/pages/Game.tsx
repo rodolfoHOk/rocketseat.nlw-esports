@@ -73,8 +73,14 @@ export function Game() {
       </div>
 
       {ads.length > 0 && (
-        <div className="mt-8">
-          <AdInfos ad={ads[0]} onConnect={() => handleConnect(ads[0].id)} />
+        <div className="flex mt-8">
+          {ads.map((ad) => (
+            <AdInfos
+              key={ad.id}
+              ad={ad}
+              onConnect={() => handleConnect(ad.id)}
+            />
+          ))}
         </div>
       )}
     </div>
