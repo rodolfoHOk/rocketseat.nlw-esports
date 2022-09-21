@@ -34,8 +34,8 @@
 
 - responsividade
 - carrousel com biblioteca keen-slider
-- usar radix select para escolha do game
-- validação (react-hook-forms)
+- usar radix select para escolha do game // OK
+- validação (react-hook-forms) // OK
 - autenticação com discord
 
 ## 🔗 Links úteis ✨
@@ -44,3 +44,7 @@
 - https://www.radix-ui.com/docs/primitives/components/dialog
 - https://www.radix-ui.com/docs/primitives/components/checkbox
 - https://www.radix-ui.com/docs/primitives/components/toggle-group
+- https://www.radix-ui.com/docs/primitives/components/select
+- https://github.com/colinhacks/zod
+- https://react-hook-form.com/get-started
+- https://github.com/react-hook-form/resolvers

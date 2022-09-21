@@ -1,8 +1,15 @@
 import * as Dialog from '@radix-ui/react-dialog';
 import * as Checkbox from '@radix-ui/react-checkbox';
 import * as ToggleGroup from '@radix-ui/react-toggle-group';
+import * as Select from '@radix-ui/react-select';
 import axios from 'axios';
-import { Check, GameController } from 'phosphor-react';
+import {
+  CaretDoubleDown,
+  CaretDoubleUp,
+  CaretDown,
+  Check,
+  GameController,
+} from 'phosphor-react';
 import { Input } from './Form/Input';
 import { useEffect, useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
@@ -76,22 +83,66 @@ export function CreateAdModal() {
             <label htmlFor="game" className="font-semibold">
               Qual o game?
             </label>
-            <select
-              {...register('game', { required: true })}
-              id="game"
-              className="bg-zinc-900 py-3 px-4 rounded text-sm placeholder:text-zinc-500"
-              defaultValue=""
-            >
-              <option disabled value="">
-                Selecione o game que deseja jogar
-              </option>
 
-              {games.map((game) => (
-                <option key={game.id} value={game.id}>
-                  {game.title}
-                </option>
-              ))}
-            </select>
+            <Controller
+              name="game"
+              control={control}
+              render={({ field }) => (
+                <Select.Root
+                  {...field}
+                  value={field.value}
+                  onValueChange={field.onChange}
+                >
+                  <Select.Trigger
+                    aria-label="game"
+                    className="flex items-center justify-between bg-zinc-900 py-3 px-4 rounded text-sm"
+                  >
+                    <Select.Value placeholder="Selecione o game que deseja jogar" />
+                    <Select.Icon>
+                      <CaretDown size={16} weight="bold" />
+                    </Select.Icon>
+                  </Select.Trigger>
+
+                  <Select.Portal>
+                    <Select.Content className="bg-zinc-800 py-3 px-4 rounded text-sm text-white shadow-md shadow-zinc-900">
+                      <Select.ScrollUpButton className="flex items-center justify-center px-2 py-2 rounded hover:bg-violet-600">
+                        <CaretDoubleUp size={16} weight="bold" />
+                      </Select.ScrollUpButton>
+
+                      <Select.Viewport>
+                        <Select.Group>
+                          <Select.Label className="px-2 py-2 text-zinc-500">
+                            Selecione o game que deseja jogar
+                          </Select.Label>
+
+                          {games.map((game) => (
+                            <Select.Item
+                              key={game.id}
+                              value={game.id}
+                              className="flex items-center px-2 py-2 justify-between rounded hover:bg-violet-600"
+                            >
+                              <Select.ItemText>{game.title}</Select.ItemText>
+
+                              <Select.ItemIndicator>
+                                <Check
+                                  size={16}
+                                  weight="bold"
+                                  className="text-violet-500"
+                                />
+                              </Select.ItemIndicator>
+                            </Select.Item>
+                          ))}
+                        </Select.Group>
+                      </Select.Viewport>
+
+                      <Select.ScrollDownButton>
+                        <CaretDoubleDown size={16} weight="bold" />
+                      </Select.ScrollDownButton>
+                    </Select.Content>
+                  </Select.Portal>
+                </Select.Root>
+              )}
+            />
             <span className="text-red-500 text-xs">{errors.game?.message}</span>
           </div>
 
