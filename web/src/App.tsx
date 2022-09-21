@@ -49,7 +49,7 @@ function App() {
     },
     slides: { perView: 1 },
     slideChanged(slider) {
-      setCurrentSlide(slider.track.details.rel + 5);
+      setCurrentSlide(slider.track.details.rel);
     },
     created() {
       setLoaded(true);
@@ -66,7 +66,7 @@ function App() {
     <div className="max-w-[1344px] mx-auto flex flex-col items-center my-20">
       <img src={logoImg} alt="" />
 
-      <h1 className="text-6xl text-white font-black mt-20">
+      <h1 className="text-4xl md:text-6xl text-white font-black mt-20">
         Seu{' '}
         <span className="text-transparent bg-nlw-gradient bg-clip-text">
           duo
@@ -75,8 +75,8 @@ function App() {
       </h1>
 
       {games.length > 0 && (
-        <div className="max-w-[1344px] mx-auto flex relative">
-          <div ref={sliderRef} className="keen-slider mt-16">
+        <div className="max-w-[1344px] w-full mx-auto flex relative">
+          <div ref={sliderRef} className="keen-slider mt-16 mx-6">
             {games.map((game) => (
               <div className="keen-slider__slide" key={game.id}>
                 <GameBanner
@@ -96,7 +96,7 @@ function App() {
                 onClick={(e: any) =>
                   e.stopPropagation() || instanceRef.current?.prev()
                 }
-                disabled={currentSlide <= 5}
+                disabled={currentSlide === 0}
               />
 
               <Arrow

@@ -34,7 +34,7 @@
 
 ## ➕ Sugestões de melhorias ✨
 
-- responsividade
+- responsividade // OK
 - carrousel com biblioteca keen-slider // OK
 - usar radix select para escolha do game // OK
 - validação (react-hook-forms) // OK

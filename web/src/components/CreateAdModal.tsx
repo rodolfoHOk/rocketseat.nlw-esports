@@ -71,13 +71,13 @@ export function CreateAdModal() {
     <Dialog.Portal>
       <Dialog.Overlay className="bg-black/60 inset-0 fixed" />
 
-      <Dialog.Content className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-[#2A2634] py-8 px-10 text-white rounded-lg w-[480px] shadow-lg shadow-black/25">
-        <Dialog.Title className="text-3xl font-black">
+      <Dialog.Content className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-[#2A2634] py-4 px-6 sm:py-8 sm:px-10 text-white rounded-lg w-full sm:w-[480px] shadow-lg shadow-black/25">
+        <Dialog.Title className="text-2xl sm:text-3xl font-black">
           Publique um anúncio
         </Dialog.Title>
 
         <form
-          className="flex flex-col gap-4 mt-6"
+          className="flex flex-col gap-1 sm:gap-4 mt-4 sm:mt-6"
           onSubmit={handleSubmit(handleCreateAd)}
         >
           <div className="flex flex-col gap-2">
@@ -159,7 +159,7 @@ export function CreateAdModal() {
             <span className="text-red-500 text-xs">{errors.name?.message}</span>
           </div>
 
-          <div className="grid grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-1 sm:gap-6">
             <div className="flex flex-col gap-2">
               <label htmlFor="yearsPlaying">Joga a quantos anos?</label>
               <Input
@@ -191,7 +191,7 @@ export function CreateAdModal() {
             </div>
           </div>
 
-          <div className="flex gap-6">
+          <div className="flex flex-col sm:flex-row gap-1 sm:gap-6">
             <div className="flex flex-col gap-2">
               <label htmlFor="weekDays">Quando costuma jogar?</label>
 
@@ -203,7 +203,7 @@ export function CreateAdModal() {
                   <ToggleGroup.Root
                     {...field}
                     type="multiple"
-                    className="grid grid-cols-4 gap-2"
+                    className="grid grid-cols-7 sm:grid-cols-4 gap-2"
                     // @ts-ignore
                     value={field.value}
                     onValueChange={field.onChange}
@@ -354,7 +354,7 @@ export function CreateAdModal() {
             </Dialog.Close>
 
             <button
-              className="flex items-center gap-3 bg-violet-500 px-5 h-12 rounded-md font-semibold hover:bg-violet-600"
+              className="flex items-center gap-1 sm:gap-3 bg-violet-500 px-5 h-12 rounded-md font-semibold hover:bg-violet-600"
               type="submit"
             >
               <GameController size={24} />
