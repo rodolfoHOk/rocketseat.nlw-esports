@@ -9,6 +9,8 @@ module.exports = {
           'linear-gradient(89.86deg, #9572FC 3%, #43E7AD 66%, #E1D55D 97%)',
         'game-gradient':
           'linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.9) 67.08%)',
+        'ad-gradient':
+          'linear-gradient(90deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.3) 50%, rgba(0, 0, 0, 0) 100%)',
       },
       colors: {},
     },

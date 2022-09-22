@@ -40,6 +40,13 @@
 - validação (react-hook-forms) // OK
 - autenticação com discord
 
+## ➕ O que fiz além ✨
+
+- sugestões de melhorias marcadas com OK
+- adicionada página de anúncios do game selecionado, parecido com a do mobile,
+  com carrousel dos anúncios, modal de conectar e botão de copiar o discord para
+  o clipboard.
+
 ## 🔗 Links úteis ✨
 
 - https://tailwindcss.com/docs/installation/using-postcss

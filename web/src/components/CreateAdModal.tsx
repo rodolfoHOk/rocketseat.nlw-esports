@@ -347,14 +347,14 @@ export function CreateAdModal() {
 
           <footer className="flex justify-end gap-4 mt-4">
             <Dialog.Close
-              className="bg-zinc-500 px-5 h-12 rounded-md font-semibold hover:bg-zinc-600"
+              className="bg-zinc-500 px-5 h-12 rounded-md font-semibold hover:bg-zinc-600 transition-colors duration-200"
               type="button"
             >
               Cancelar
             </Dialog.Close>
 
             <button
-              className="flex items-center gap-1 sm:gap-3 bg-violet-500 px-5 h-12 rounded-md font-semibold hover:bg-violet-600"
+              className="flex items-center gap-1 sm:gap-3 bg-violet-500 px-5 h-12 rounded-md font-semibold hover:bg-violet-600 transition-colors duration-200"
               type="submit"
             >
               <GameController size={24} />

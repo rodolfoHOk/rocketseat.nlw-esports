@@ -1,10 +1,16 @@
 import { useEffect, useState } from 'react';
-import { useParams, useSearchParams } from 'react-router-dom';
+import { Link, useParams, useSearchParams } from 'react-router-dom';
+import { useKeenSlider } from 'keen-slider/react';
+import * as Dialog from '@radix-ui/react-dialog';
 import axios from 'axios';
 
-import logoImg from '../assets/logo-nlw-esports.svg';
-import { GameBanner } from '../components/GameBanner';
 import { AdInfos } from '../components/AdInfos';
+import { Arrow } from '../components/Arrow';
+
+import logoImg from '../assets/logo-nlw-esports.svg';
+import 'keen-slider/keen-slider.min.css';
+import { House } from 'phosphor-react';
+import { ConnectModal } from '../components/ConnectModal';
 
 interface Ad {
   id: string;
@@ -25,8 +31,41 @@ export function Game() {
   const [queryParams] = useSearchParams();
 
   const [ads, setAds] = useState<Ad[]>([]);
-  const [loading, setLoading] = useState(false);
   const [selectedDiscord, setSelectedDiscord] = useState('');
+  const [loading, setLoading] = useState(false);
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const [loaded, setLoaded] = useState(false);
+
+  const [sliderRef, instanceRef] = useKeenSlider<HTMLDivElement>({
+    initial: 0,
+    breakpoints: {
+      '(min-width: 288px)': {
+        slides: { perView: 1, spacing: 0 },
+      },
+      '(min-width: 440px)': {
+        slides: { perView: 2, spacing: 6 },
+      },
+      '(min-width: 667px)': {
+        slides: { perView: 3, spacing: 12 },
+      },
+      '(min-width: 900px)': {
+        slides: { perView: 4, spacing: 12 },
+      },
+      '(min-width: 1120px)': {
+        slides: { perView: 5, spacing: 18 },
+      },
+      '(min-width: 1344px)': {
+        slides: { perView: 6, spacing: 24 },
+      },
+    },
+    slides: { perView: 1 },
+    slideChanged(slider) {
+      setCurrentSlide(slider.track.details.rel);
+    },
+    created() {
+      setLoaded(true);
+    },
+  });
 
   async function getGameAds(gameId: string): Promise<Ad[]> {
     const { data } = await axios.get<Ad[]>(
@@ -43,44 +82,82 @@ export function Game() {
   }
 
   function handleConnect(adId: string) {
-    getAdDiscord(adId).then((response) => setSelectedDiscord(response.discord));
+    setLoading(true);
+    getAdDiscord(adId)
+      .then((response) => setSelectedDiscord(response.discord))
+      .finally(() => setLoading(false));
   }
 
   useEffect(() => {
-    console.log(selectedDiscord);
-  }, [selectedDiscord]);
-
-  useEffect(() => {
     if (id) {
-      setLoading(true);
-      getGameAds(id)
-        .then((response) => setAds(response))
-        .finally(() => setLoading(false));
+      getGameAds(id).then((response) => setAds(response));
     }
   }, []);
 
   return (
-    <div className="max-w-[1344px] mx-auto flex flex-col items-center mt-10">
-      <img src={logoImg} alt="" width={200} />
+    <div className="max-w-[1344px] mx-auto flex flex-col items-center mt-10 mb-4 relative">
+      <img src={logoImg} alt="" className="w-[185px] sm:w-[285px]" />
 
-      <div className="rounded-xl overflow-hidden mt-4">
-        <GameBanner
-          id={id as string}
-          title={queryParams.get('title') as string}
-          bannerUrl={queryParams.get('banner') as string}
-          adsCount={Number(queryParams.get('count') as string)}
-        />
+      <Link
+        to="/"
+        className="absolute top-32 sm:top-2 left-1 sm:left-6 flex items-center gap-2 bg-black/5 hover:bg-black/30 px-4 py-2 rounded-lg text-zinc-400 hover:text-white transition-colors duration-200"
+      >
+        <House size={20} />
+        <span>Voltar</span>
+      </Link>
+
+      <div className="w-full my-4 px-6">
+        <div className="flex flex-col items-center gap-3 pt-4 pb-8 px-4 bg-ad-gradient">
+          <div className="w-40 h-40 rounded-full overflow-hidden">
+            <img src={queryParams.get('banner') as string} alt="" />
+          </div>
+
+          <strong className="font-bold text-2xl text-white block">
+            {queryParams.get('title') as string}
+          </strong>
+        </div>
       </div>
 
-      {ads.length > 0 && (
-        <div className="flex mt-8">
-          {ads.map((ad) => (
-            <AdInfos
-              key={ad.id}
-              ad={ad}
-              onConnect={() => handleConnect(ad.id)}
-            />
-          ))}
+      {ads.length > 0 ? (
+        <div className="max-w-[1344px] w-full mx-auto flex relative">
+          <Dialog.Root>
+            <div ref={sliderRef} className="keen-slider mx-6">
+              {ads.map((ad) => (
+                <div className="keen-slider__slide" key={ad.id}>
+                  <AdInfos ad={ad} onConnect={() => handleConnect(ad.id)} />
+                </div>
+              ))}
+            </div>
+            <ConnectModal loading={loading} discord={selectedDiscord} />
+          </Dialog.Root>
+          {loaded && instanceRef.current && (
+            <>
+              <Arrow
+                left
+                onClick={(e: any) =>
+                  e.stopPropagation() || instanceRef.current?.prev()
+                }
+                disabled={currentSlide === 0}
+              />
+
+              <Arrow
+                onClick={(e: any) =>
+                  e.stopPropagation() || instanceRef.current?.next()
+                }
+                disabled={
+                  instanceRef.current.track.details &&
+                  currentSlide ===
+                    instanceRef.current.track.details.slides.length - 1
+                }
+              />
+            </>
+          )}
+        </div>
+      ) : (
+        <div className="max-w-[1344px] mx-auto flex flex-col items-center mt-10 mb-4">
+          <span className="font-bold text-white text-xl">
+            Sem anúncios ainda
+          </span>
         </div>
       )}
     </div>

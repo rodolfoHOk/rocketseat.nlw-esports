@@ -1,3 +1,4 @@
+import * as Dialog from '@radix-ui/react-dialog';
 import { GameController } from 'phosphor-react';
 
 interface Ad {
@@ -17,7 +18,7 @@ interface AdInfosProps {
 
 export function AdInfos({ ad, onConnect }: AdInfosProps) {
   return (
-    <div className="w-50 bg-[#2A2634] rounded-lg p-5 mr-4 flex flex-col items-center">
+    <div className="bg-[#2A2634] rounded-lg p-5 flex flex-col items-center">
       <div className="flex flex-col w-full mb-4">
         <span className="mb-1 text-zinc-500 text-sm">Nome</span>
         <span className="text-white text-sm font-bold">{ad.name}</span>
@@ -30,8 +31,82 @@ export function AdInfos({ ad, onConnect }: AdInfosProps) {
 
       <div className="flex flex-col w-full mb-4">
         <span className="mb-1 text-zinc-500 text-sm">Disponibilidade</span>
+
+        <div className="flex gap-1 text-white text-sm font-bold mb-1">
+          <span
+            className={`w-6 h-6 rounded flex justify-center items-center
+              ${
+                ad.weekDays.toString().includes('0')
+                  ? 'bg-violet-500'
+                  : 'bg-zinc-900'
+              }`}
+          >
+            D
+          </span>
+          <span
+            className={`w-6 h-6 rounded flex justify-center items-center
+              ${
+                ad.weekDays.toString().includes('1')
+                  ? 'bg-violet-500'
+                  : 'bg-zinc-900'
+              }`}
+          >
+            S
+          </span>
+          <span
+            className={`w-6 h-6 rounded flex justify-center items-center
+              ${
+                ad.weekDays.toString().includes('2')
+                  ? 'bg-violet-500'
+                  : 'bg-zinc-900'
+              }`}
+          >
+            T
+          </span>
+          <span
+            className={`w-6 h-6 rounded flex justify-center items-center
+              ${
+                ad.weekDays.toString().includes('3')
+                  ? 'bg-violet-500'
+                  : 'bg-zinc-900'
+              }`}
+          >
+            Q
+          </span>
+          <span
+            className={`w-6 h-6 rounded flex justify-center items-center
+              ${
+                ad.weekDays.toString().includes('4')
+                  ? 'bg-violet-500'
+                  : 'bg-zinc-900'
+              }`}
+          >
+            Q
+          </span>
+          <span
+            className={`w-6 h-6 rounded flex justify-center items-center
+              ${
+                ad.weekDays.toString().includes('5')
+                  ? 'bg-violet-500'
+                  : 'bg-zinc-900'
+              }`}
+          >
+            S
+          </span>
+          <span
+            className={`w-6 h-6 rounded flex justify-center items-center
+              ${
+                ad.weekDays.toString().includes('6')
+                  ? 'bg-violet-500'
+                  : 'bg-zinc-900'
+              }`}
+          >
+            S
+          </span>
+        </div>
+
         <span className="text-white text-sm font-bold">
-          {`${ad.weekDays.length} dias \u2022 ${ad.hourStart} - ${ad.hourEnd}`}
+          {`${ad.hourStart} - ${ad.hourEnd}`}
         </span>
       </div>
 
@@ -45,13 +120,13 @@ export function AdInfos({ ad, onConnect }: AdInfosProps) {
         </span>
       </div>
 
-      <button
+      <Dialog.Trigger
         onClick={onConnect}
         className="w-full h-9 flex items-center justify-center gap-2 text-sm font-bold text-white rounded-md bg-violet-500 hover:bg-violet-600 transition-colors duration-200"
       >
         <GameController size={20} />
         <span>Conectar</span>
-      </button>
+      </Dialog.Trigger>
     </div>
   );
 }
