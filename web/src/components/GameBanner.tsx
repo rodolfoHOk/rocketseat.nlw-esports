@@ -11,7 +11,7 @@ export function GameBanner(props: GameBannerProps) {
   return (
     <Link
       to={`/games/${props.id}?title=${props.title}&banner=${props.bannerUrl}&count=${props.adsCount}`}
-      className="relative flex rounded-lg overflow-hidden"
+      className="relative flex rounded-lg overflow-hidden max-w-[230px] md:max-w-[285px]"
     >
       <img src={props.bannerUrl} alt="" />
 

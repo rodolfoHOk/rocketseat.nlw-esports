@@ -1,7 +1,7 @@
 import { z } from 'zod';
 
 export const AdModel = z.object({
-  game: z.string().min(1, 'é obrigatório'),
+  game: z.string({ required_error: 'é obrigatório' }).min(1, 'é obrigatório'),
   name: z.string().min(2, 'deve ter ao menos 2 caracteres'),
   yearsPlaying: z
     .number({

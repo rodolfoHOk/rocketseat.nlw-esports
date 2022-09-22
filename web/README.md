@@ -34,15 +34,14 @@
 
 ## ➕ Sugestões de melhorias ✨
 
-- responsividade // OK
-- carrousel com biblioteca keen-slider // OK
-- usar radix select para escolha do game // OK
-- validação (react-hook-forms) // OK
 - autenticação com discord
 
 ## ➕ O que fiz além ✨
 
-- sugestões de melhorias marcadas com OK
+- responsividade
+- carrousel com biblioteca keen-slider
+- uso do radix select para escolha do game
+- validação com zod e react-hook-forms
 - adicionada página de anúncios do game selecionado, parecido com a do mobile,
   com carrousel dos anúncios, modal de conectar e botão de copiar o discord para
   o clipboard.

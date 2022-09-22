@@ -63,10 +63,10 @@ function App() {
   }, []);
 
   return (
-    <div className="max-w-[1344px] mx-auto flex flex-col items-center my-20">
-      <img src={logoImg} alt="" />
+    <div className="max-w-[1344px] mx-auto flex flex-col items-center mt-8 mb-1 md:my-20">
+      <img src={logoImg} alt="" className="h-32 md:h-auto" />
 
-      <h1 className="text-4xl md:text-6xl text-white font-black mt-20">
+      <h1 className="text-4xl md:text-6xl text-white font-black mt-8 md:mt-20">
         Seu{' '}
         <span className="text-transparent bg-nlw-gradient bg-clip-text">
           duo
@@ -76,7 +76,7 @@ function App() {
 
       {games.length > 0 && (
         <div className="max-w-[1344px] w-full mx-auto flex relative">
-          <div ref={sliderRef} className="keen-slider mt-16 mx-6">
+          <div ref={sliderRef} className="keen-slider mt-8 md:mt-16 mx-6">
             {games.map((game) => (
               <div className="keen-slider__slide" key={game.id}>
                 <GameBanner
