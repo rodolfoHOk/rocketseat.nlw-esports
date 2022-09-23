@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-import axios from 'axios';
 import * as Dialog from '@radix-ui/react-dialog';
 import { useKeenSlider } from 'keen-slider/react';
 
@@ -7,18 +6,12 @@ import { GameBanner } from './components/GameBanner';
 import { CreateAdBanner } from './components/CreateAdBanner';
 import { CreateAdModal } from './components/CreateAdModal';
 import { Arrow } from './components/Arrow';
+import { Game, getTopGames } from './services/api';
 
 import logoImg from './assets/logo-nlw-esports.svg';
 
 import 'keen-slider/keen-slider.min.css';
 import './styles/main.css';
-
-interface Game {
-  id: string;
-  title: string;
-  bannerUrl: string;
-  adsCount: number;
-}
 
 function App() {
   const [games, setGames] = useState<Game[]>([]);
@@ -57,9 +50,7 @@ function App() {
   });
 
   useEffect(() => {
-    axios
-      .get('http://localhost:3333/games')
-      .then((response) => setGames(response.data));
+    getTopGames().then(setGames);
   }, []);
 
   return (

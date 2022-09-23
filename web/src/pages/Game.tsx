@@ -2,29 +2,15 @@ import { useEffect, useState } from 'react';
 import { Link, useParams, useSearchParams } from 'react-router-dom';
 import { useKeenSlider } from 'keen-slider/react';
 import * as Dialog from '@radix-ui/react-dialog';
-import axios from 'axios';
+import { House } from 'phosphor-react';
 
 import { AdInfos } from '../components/AdInfos';
 import { Arrow } from '../components/Arrow';
+import { ConnectModal } from '../components/ConnectModal';
+import { Ad, getAdDiscord, getGameAds } from '../services/api';
 
 import logoImg from '../assets/logo-nlw-esports.svg';
 import 'keen-slider/keen-slider.min.css';
-import { House } from 'phosphor-react';
-import { ConnectModal } from '../components/ConnectModal';
-
-interface Ad {
-  id: string;
-  name: string;
-  yearsPlaying: number;
-  weekDays: number[];
-  hourEnd: string;
-  hourStart: string;
-  useVoiceChannel: boolean;
-}
-
-interface Discord {
-  discord: string;
-}
 
 export function Game() {
   const { id } = useParams();
@@ -67,20 +53,6 @@ export function Game() {
     },
   });
 
-  async function getGameAds(gameId: string): Promise<Ad[]> {
-    const { data } = await axios.get<Ad[]>(
-      `http://localhost:3333/games/${gameId}/ads`
-    );
-    return data;
-  }
-
-  async function getAdDiscord(adId: string): Promise<Discord> {
-    const { data } = await axios.get<Discord>(
-      `http://localhost:3333/ads/${adId}/discord`
-    );
-    return data;
-  }
-
   function handleConnect(adId: string) {
     setLoading(true);
     getAdDiscord(adId)
@@ -90,7 +62,7 @@ export function Game() {
 
   useEffect(() => {
     if (id) {
-      getGameAds(id).then((response) => setAds(response));
+      getGameAds(id).then(setAds);
     }
   }, []);
 

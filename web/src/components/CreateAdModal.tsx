@@ -15,7 +15,8 @@ import {
 import axios from 'axios';
 
 import { Input } from './Form/Input';
-import { Ad, AdModel } from '../dto/adDto';
+import { AdDto, AdDtoModel } from '../dto/adDto';
+import { createAd } from '../services/api';
 
 interface Game {
   id: string;
@@ -29,8 +30,8 @@ export function CreateAdModal() {
     formState: { errors },
     control,
     watch,
-  } = useForm<Ad>({
-    resolver: zodResolver(AdModel),
+  } = useForm<AdDto>({
+    resolver: zodResolver(AdDtoModel),
   });
 
   const [games, setGames] = useState<Game[]>([]);
@@ -42,22 +43,21 @@ export function CreateAdModal() {
       .then((response) => setGames(response.data));
   }, []);
 
-  async function handleCreateAd(data: Ad) {
-    try {
-      await axios.post(`http://localhost:3333/games/${data.game}/ads`, {
-        name: data.name,
-        yearsPlaying: data.yearsPlaying,
-        discord: data.discord,
-        weekDays: data.weekDays.map(Number),
-        hourStart: data.hourStart,
-        hourEnd: data.hourEnd,
-        useVoiceChannel: data.useVoiceChannel,
+  async function handleCreateAd(adDto: AdDto) {
+    createAd(adDto.game, {
+      name: adDto.name,
+      yearsPlaying: adDto.yearsPlaying,
+      discord: adDto.discord,
+      weekDays: adDto.weekDays.map(Number),
+      hourStart: adDto.hourStart,
+      hourEnd: adDto.hourEnd,
+      useVoiceChannel: adDto.useVoiceChannel,
+    })
+      .then(() => alert('Anúncio criado com sucesso'))
+      .catch((err) => {
+        console.log(err);
+        alert('Erro ao tentar criar o anúncio');
       });
-      alert('Anúncio criado com sucesso');
-    } catch (err) {
-      console.log(err);
-      alert('Erro ao tentar criar o anúncio');
-    }
   }
 
   useEffect(() => {

@@ -1,6 +1,6 @@
 import { z } from 'zod';
 
-export const AdModel = z.object({
+export const AdDtoModel = z.object({
   game: z.string({ required_error: 'é obrigatório' }).min(1, 'é obrigatório'),
   name: z.string().min(2, 'deve ter ao menos 2 caracteres'),
   yearsPlaying: z
@@ -32,4 +32,4 @@ export const AdModel = z.object({
   }),
 });
 
-export type Ad = z.infer<typeof AdModel>;
+export type AdDto = z.infer<typeof AdDtoModel>;
