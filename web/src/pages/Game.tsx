@@ -96,7 +96,10 @@ export function Game() {
             <div ref={sliderRef} className="keen-slider mx-6">
               {ads.map((ad) => (
                 <div className="keen-slider__slide" key={ad.id}>
-                  <AdInfos ad={ad} onConnect={() => handleConnect(ad.id)} />
+                  <AdInfos
+                    ad={ad}
+                    onConnect={() => handleConnect(ad.id as string)}
+                  />
                 </div>
               ))}
             </div>

@@ -92,6 +92,8 @@ export function AuthProvider({ children }: AuthProviderProps) {
       if (code) {
         login(code);
       }
+    } else if (currentUrl.includes('login/callback?error=')) {
+      navigate('/login');
     }
   }, []);
 

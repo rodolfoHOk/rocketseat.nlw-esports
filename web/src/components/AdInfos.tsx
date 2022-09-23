@@ -1,15 +1,8 @@
 import * as Dialog from '@radix-ui/react-dialog';
 import { GameController } from 'phosphor-react';
-
-interface Ad {
-  id: string;
-  name: string;
-  yearsPlaying: number;
-  weekDays: number[];
-  hourEnd: string;
-  hourStart: string;
-  useVoiceChannel: boolean;
-}
+import { useAuth } from '../contexts/AuthContext';
+import { Ad } from '../services/api';
+import { LoginButton } from './LoginButton';
 
 interface AdInfosProps {
   ad: Ad;
@@ -17,6 +10,8 @@ interface AdInfosProps {
 }
 
 export function AdInfos({ ad, onConnect }: AdInfosProps) {
+  const { user } = useAuth();
+
   return (
     <div className="bg-[#2A2634] rounded-lg p-5 flex flex-col items-center">
       <div className="flex flex-col w-full mb-4">
@@ -120,13 +115,17 @@ export function AdInfos({ ad, onConnect }: AdInfosProps) {
         </span>
       </div>
 
-      <Dialog.Trigger
-        onClick={onConnect}
-        className="w-full h-9 flex items-center justify-center gap-2 text-sm font-bold text-white rounded-md bg-violet-500 hover:bg-violet-600 transition-colors duration-200"
-      >
-        <GameController size={20} />
-        <span>Conectar</span>
-      </Dialog.Trigger>
+      {user ? (
+        <Dialog.Trigger
+          onClick={onConnect}
+          className="w-full h-9 flex items-center justify-center gap-2 text-sm font-bold text-white rounded-md bg-violet-500 hover:bg-violet-600 transition-colors duration-200"
+        >
+          <GameController size={20} />
+          <span>Conectar</span>
+        </Dialog.Trigger>
+      ) : (
+        <LoginButton label="Logar para conectar" />
+      )}
     </div>
   );
 }

@@ -54,7 +54,7 @@ function App() {
   }, []);
 
   return (
-    <div className="max-w-[1344px] mx-auto flex flex-col items-center mt-8 mb-1 md:my-20">
+    <div className="max-w-[1344px] mx-auto flex flex-col items-center mt-8 mb-1 md:mt-20 md:mb-20">
       <img src={logoImg} alt="" className="h-32 md:h-auto" />
 
       <h1 className="text-4xl md:text-6xl text-white font-black mt-8 md:mt-20">
