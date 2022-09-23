@@ -12,6 +12,7 @@ interface User {
   id: string;
   username: string;
   email: string;
+  discord: string;
   avatarUrl: string;
 }
 
