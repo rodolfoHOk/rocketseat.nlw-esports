@@ -1,10 +1,10 @@
 import { InputHTMLAttributes } from 'react';
 import { Path, UseFormRegister } from 'react-hook-form';
-import { Ad } from '../../dto/adDto';
+import { AdDto } from '../../dto/adDto';
 
 interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
-  label: Path<Ad>;
-  register: UseFormRegister<Ad>;
+  label: Path<AdDto>;
+  register: UseFormRegister<AdDto>;
   required: boolean;
 }
 

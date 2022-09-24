@@ -9,7 +9,6 @@ export const AdDtoModel = z.object({
     })
     .int('deve ser um número inteiro')
     .min(0, 'deve ser maior ou igual a 0'),
-  discord: z.string().min(6, 'deve ter ao menos 6 caracteres'),
   weekDays: z
     .array(
       z

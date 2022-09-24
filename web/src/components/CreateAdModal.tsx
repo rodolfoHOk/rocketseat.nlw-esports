@@ -14,9 +14,11 @@ import {
 } from 'phosphor-react';
 import axios from 'axios';
 
+import { useAuth } from '../contexts/AuthContext';
 import { Input } from './Form/Input';
 import { AdDto, AdDtoModel } from '../dto/adDto';
 import { createAd } from '../services/api';
+import { useNavigate } from 'react-router-dom';
 
 interface Game {
   id: string;
@@ -24,6 +26,13 @@ interface Game {
 }
 
 export function CreateAdModal() {
+  const navigate = useNavigate();
+  const { user } = useAuth();
+
+  if (!user) {
+    navigate('/login');
+  }
+
   const {
     register,
     handleSubmit,
@@ -47,7 +56,7 @@ export function CreateAdModal() {
     createAd(adDto.game, {
       name: adDto.name,
       yearsPlaying: adDto.yearsPlaying,
-      discord: adDto.discord,
+      discord: user!.discord,
       weekDays: adDto.weekDays.map(Number),
       hourStart: adDto.hourStart,
       hourEnd: adDto.hourEnd,
@@ -176,17 +185,9 @@ export function CreateAdModal() {
             </div>
 
             <div className="flex flex-col gap-2">
-              <label htmlFor="discord">Qual seu discord?</label>
-              <Input
-                label="discord"
-                register={register}
-                required={true}
-                id="discord"
-                type="text"
-                placeholder="Usuário#0000"
-              />
-              <span className="text-red-500 text-xs">
-                {errors.discord?.message}
+              <label htmlFor="discord">Seu Discord</label>
+              <span className="bg-zinc-900 py-3 px-4 rounded text-sm placeholder:text-zinc-500">
+                {user?.discord}
               </span>
             </div>
           </div>
