@@ -29,10 +29,6 @@ export function CreateAdModal() {
   const navigate = useNavigate();
   const { user } = useAuth();
 
-  if (!user) {
-    navigate('/login');
-  }
-
   const {
     register,
     handleSubmit,

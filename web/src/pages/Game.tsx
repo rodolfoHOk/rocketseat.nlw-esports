@@ -11,6 +11,7 @@ import { Ad, getAdDiscord, getGameAds } from '../services/api';
 
 import logoImg from '../assets/logo-nlw-esports.svg';
 import 'keen-slider/keen-slider.min.css';
+import { LoginArea } from '../components/LoginArea';
 
 export function Game() {
   const { id } = useParams();
@@ -68,14 +69,18 @@ export function Game() {
 
   return (
     <div className="max-w-[1344px] mx-auto flex flex-col items-center mt-10 mb-4 relative">
+      <div className="absolute top-2 sm:top-0 right-6">
+        <LoginArea />
+      </div>
+
       <img src={logoImg} alt="" className="w-[185px] sm:w-[285px]" />
 
       <Link
         to="/"
-        className="absolute top-32 sm:top-2 left-1 sm:left-6 flex items-center gap-2 bg-black/5 hover:bg-black/30 px-4 py-2 rounded-lg text-zinc-400 hover:text-white transition-colors duration-200"
+        className="absolute top-0 sm:top-1 left-6 flex flex-col sm:flex-row items-center gap-1 sm:gap-2 bg-black/5 hover:bg-black/30 px-2 py-2 border-[1px] border-violet-500 rounded-lg text-zinc-400 hover:text-white transition-colors duration-200"
       >
         <House size={20} />
-        <span>Voltar</span>
+        <span className="text-sm sm:text-base">Voltar</span>
       </Link>
 
       <div className="w-full my-4 px-6">

@@ -4,7 +4,7 @@ export interface UserData {
   email: string;
   discord: string;
   avatar_url: string;
-  createdAt: Date;
+  created_at: Date;
 }
 
 export interface CreateUserData {

@@ -1,11 +1,11 @@
 import { Request, Response } from 'express';
 import { ProblemResponse } from '../errors/problem-response';
-import { UserData } from '../repositories/auth-user-repository';
+import { UserInfos } from '../providers/provider';
 import { PrismaAuthUserRepository } from '../repositories/prisma-auth-user-repository';
 import { GetAuthUserInfosService } from '../services/get-auth-user-infos-service';
 
 export class GetAuthUserInfosController {
-  async handle(req: Request, res: Response<UserData | ProblemResponse>) {
+  async handle(req: Request, res: Response<UserInfos | ProblemResponse>) {
     const userId = req.user_id;
     if (userId) {
       const repository = new PrismaAuthUserRepository();

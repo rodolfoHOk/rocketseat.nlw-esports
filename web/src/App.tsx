@@ -12,6 +12,7 @@ import logoImg from './assets/logo-nlw-esports.svg';
 
 import 'keen-slider/keen-slider.min.css';
 import './styles/main.css';
+import { LoginArea } from './components/LoginArea';
 
 function App() {
   const [games, setGames] = useState<Game[]>([]);
@@ -54,7 +55,11 @@ function App() {
   }, []);
 
   return (
-    <div className="max-w-[1344px] mx-auto flex flex-col items-center mt-8 mb-1 md:mt-20 md:mb-20">
+    <div className="relative max-w-[1344px] mx-auto flex flex-col items-center mt-8 mb-1 md:mt-20 md:mb-20">
+      <div className="absolute top-0 right-6">
+        <LoginArea />
+      </div>
+
       <img src={logoImg} alt="" className="h-32 md:h-auto" />
 
       <h1 className="text-4xl md:text-6xl text-white font-black mt-8 md:mt-20">

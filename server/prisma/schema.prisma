@@ -38,5 +38,5 @@ model User {
   email      String
   avatar_url String
   discord    String
-  createdAt  DateTime @default(now())
+  created_at DateTime @default(now())
 }

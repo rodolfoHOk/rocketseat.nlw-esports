@@ -16,6 +16,7 @@
 - @radix-ui/react-checkbox
 - @radix-ui/react-toggle-group
 - @radix-ui/react-select
+- @radix-ui/react-dropdown-menu
 - axios
 - react-hook-form
 - @hookform/resolvers
@@ -45,6 +46,9 @@
 - adicionada página de anúncios do game selecionado, parecido com a do mobile,
   com carrousel dos anúncios, modal de conectar e botão de copiar o discord para
   o clipboard.
+- autenticação com o Discord usando context API do React
+- renderização de componentes conforme autenticação
+- menu de login do tipo dropdown com uso do radix ui
 
 ## 🔗 Links úteis ✨
 
@@ -53,6 +57,7 @@
 - https://www.radix-ui.com/docs/primitives/components/checkbox
 - https://www.radix-ui.com/docs/primitives/components/toggle-group
 - https://www.radix-ui.com/docs/primitives/components/select
+- https://www.radix-ui.com/docs/primitives/components/dropdown-menu
 - https://github.com/colinhacks/zod
 - https://react-hook-form.com/get-started
 - https://github.com/react-hook-form/resolvers
