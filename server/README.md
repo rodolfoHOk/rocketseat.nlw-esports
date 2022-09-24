@@ -9,6 +9,7 @@
 - Express : Framework web minimalista para NodeJs
 - Prisma : ORM (Object Relational Mapping)
 - SQLite : Banco de dados relacional
+- Oauth2 : Especificação de Autenticação
 
 ### 📚 bibliotecas adicionais 🗃️
 
@@ -16,6 +17,7 @@
 - axios
 - form-data
 - zod
+- jsonwebtoken
 
 ## ➕ O que fiz além ✨
 
@@ -24,6 +26,8 @@
 - Buscar game por ID na Twitch
 - Refatoração incluindo uma camada de controllers
 - Validação dos dados antes de persistir com a biblioteca zod
+- Autenticação com o Discord
+- Proteção de rotas autenticadas
 
 ## 📃 Guia 📖
 

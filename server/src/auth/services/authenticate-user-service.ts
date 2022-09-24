@@ -1,7 +1,8 @@
-import { AuthUserRepository } from '../repository/auth-user-repository';
+import { AuthUserRepository } from '../repositories/auth-user-repository';
 import { Provider, UserInfos } from '../providers/provider';
+import { sign } from 'jsonwebtoken';
 
-interface AuthenticateUserResponse {
+export interface AuthenticateUserResponse {
   token: string;
   user: UserInfos;
 }
@@ -28,8 +29,16 @@ export class AuthenticateUserService {
       });
     }
 
-    // todo: generate app token
-    const appToken = '';
+    const appToken = sign(
+      {
+        scopes: ['READ', 'WRITE'],
+      },
+      process.env.JWT_SECRET as string,
+      {
+        subject: user.id,
+        expiresIn: 24 * 60 * 60,
+      }
+    );
 
     return {
       token: appToken,

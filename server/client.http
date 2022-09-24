@@ -40,3 +40,17 @@ GET http://localhost:3333/games/18122/ads
 
 ### Get discord by adId
 GET http://localhost:3333/ads/7485ce83-1fc6-4c10-85fb-91a615e158ca/discord
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzY29wZXMiOlsiUkVBRCIsIldSSVRFIl0sImlhdCI6MTY2Mzk4MTQ0NCwiZXhwIjoxNjY0MDY3ODQ0LCJzdWIiOiI3Mzc3ODA0OTM5NjUzMjgzODQifQ.50ISO3h-G1mGsDZABeXRiX0OSOH-yMuwd3pGytoxH6c
+
+
+### Authenticate user
+POST http://localhost:3333/oauth/login
+Content-Type: application/json
+
+{
+  "code": "PFsu6j22pmbCPBWEivFLcXOGeHaouz"
+}
+
+### Get auth user infos
+GET http://localhost:3333/oauth/user
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzY29wZXMiOlsiUkVBRCIsIldSSVRFIl0sImlhdCI6MTY2Mzk4MTQ0NCwiZXhwIjoxNjY0MDY3ODQ0LCJzdWIiOiI3Mzc3ODA0OTM5NjUzMjgzODQifQ.50ISO3h-G1mGsDZABeXRiX0OSOH-yMuwd3pGytoxH6c

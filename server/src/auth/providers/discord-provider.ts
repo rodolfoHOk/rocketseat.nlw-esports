@@ -29,7 +29,7 @@ const baseUrl = 'https://discord.com/api/v10';
 export class DiscordProvider implements Provider {
   async getToken(code: string): Promise<string> {
     const tokenUrl = `${baseUrl}/oauth2/token`;
-    const redirectUri = 'http://localhost:5173';
+    const redirectUri = 'http://localhost:5173/login/callback';
 
     const form = new FormData();
     form.append('client_id', process.env.DISCORD_CLIENT_ID as string);
@@ -38,11 +38,10 @@ export class DiscordProvider implements Provider {
     form.append('code', code);
     form.append('redirect_uri', redirectUri);
 
-    const tokenResponse = await axios.post<DiscordTokenResponse>(
-      tokenUrl,
-      form,
-      { headers: form.getHeaders() }
-    );
+    let tokenResponse = await axios.post<DiscordTokenResponse>(tokenUrl, form, {
+      headers: form.getHeaders(),
+    });
+
     return tokenResponse.data.access_token;
   }
 
