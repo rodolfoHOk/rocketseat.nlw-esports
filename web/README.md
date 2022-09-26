@@ -34,10 +34,6 @@
   Select a variant: Typescript
 - instalando as dependências do projeto: npm install
 
-## ➕ Sugestões de melhorias ✨
-
-- autenticação com discord
-
 ## ➕ O que fiz além ✨
 
 - responsividade
