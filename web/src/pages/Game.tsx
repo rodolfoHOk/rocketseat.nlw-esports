@@ -77,7 +77,7 @@ export function Game() {
 
       <Link
         to="/"
-        className="absolute top-0 sm:top-1 left-6 flex flex-col sm:flex-row items-center gap-1 sm:gap-2 bg-black/5 hover:bg-black/30 px-2 py-2 border-[1px] border-violet-500 rounded-lg text-zinc-400 hover:text-white transition-colors duration-200"
+        className="absolute top-0 sm:top-1 left-6 flex flex-col sm:flex-row items-center gap-1 sm:gap-2 bg-black/25 px-2 py-2 border-[1px] border-violet-500 rounded-lg text-violet-500 opacity-70 hover:opacity-100 transition-all duration-200"
       >
         <House size={20} />
         <span className="text-sm sm:text-base">Voltar</span>

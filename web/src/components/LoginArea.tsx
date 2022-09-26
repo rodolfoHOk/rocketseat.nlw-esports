@@ -17,7 +17,7 @@ export function LoginArea() {
           <User
             weight="thin"
             size={24}
-            className="w-12 h-12 bg-[#2A2634] border-2 border-violet-500 rounded-full opacity-70 hover:opacity-100 transition-opacity duration-200"
+            className="w-12 h-12 bg-black/25 border-2 border-violet-500 rounded-full opacity-70 hover:opacity-100 transition-opacity duration-200"
           />
         )}
       </DropdownMenu.Trigger>

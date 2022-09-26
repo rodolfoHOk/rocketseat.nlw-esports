@@ -2,16 +2,21 @@ import { Link } from 'react-router-dom';
 import { House } from 'phosphor-react';
 import logoImg from '../assets/logo-nlw-esports.svg';
 import { LoginButton } from '../components/LoginButton';
+import { LoginArea } from '../components/LoginArea';
 
 export function Login() {
   return (
     <div className="relative max-w-[1344px] mx-auto flex flex-col items-center my-20">
+      <div className="absolute top-2 sm:top-0 right-6">
+        <LoginArea />
+      </div>
+
       <Link
         to="/"
-        className="absolute top-32 sm:top-2 left-1 sm:left-6 flex items-center gap-2 bg-black/5 hover:bg-black/30 px-4 py-2 rounded-lg text-zinc-400 hover:text-white transition-colors duration-200"
+        className="absolute top-0 sm:top-1 left-6 flex flex-col sm:flex-row items-center gap-1 sm:gap-2 bg-black/25 px-2 py-2 border-[1px] border-violet-500 rounded-lg text-violet-500 opacity-70 hover:opacity-100 transition-all duration-200"
       >
         <House size={20} />
-        <span>Voltar</span>
+        <span className="text-sm sm:text-base">Voltar</span>
       </Link>
 
       <img src={logoImg} alt="" className="h-32 md:h-auto" />

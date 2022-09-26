@@ -17,6 +17,7 @@
 - @radix-ui/react-toggle-group
 - @radix-ui/react-select
 - @radix-ui/react-dropdown-menu
+- @radix-ui/react-toast
 - axios
 - react-hook-form
 - @hookform/resolvers
@@ -49,6 +50,7 @@
 - autenticação com o Discord usando context API do React
 - renderização de componentes conforme autenticação
 - menu de login do tipo dropdown com uso do radix ui
+- substituído o alert do javascript por toast do radix ui
 
 ## 🔗 Links úteis ✨
 
@@ -58,6 +60,7 @@
 - https://www.radix-ui.com/docs/primitives/components/toggle-group
 - https://www.radix-ui.com/docs/primitives/components/select
 - https://www.radix-ui.com/docs/primitives/components/dropdown-menu
+- https://www.radix-ui.com/docs/primitives/components/toast
 - https://github.com/colinhacks/zod
 - https://react-hook-form.com/get-started
 - https://github.com/react-hook-form/resolvers
