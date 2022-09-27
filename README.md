@@ -23,13 +23,39 @@
 - React Native : Biblioteca criação de interfaces mobile
 - Expo : Ferramenta de desenvolvimento mobile com React Native
 
+## ➕ O que fiz além das aulas do evento ✨
+
+### Projeto Server
+
+- Autenticação na Twitch
+- Buscar top 10 games da Twitch
+- Buscar game por ID na Twitch
+- Refatoração incluindo uma camada de controllers
+- Validação dos dados antes de persistir com a biblioteca zod
+- Autenticação com o Discord
+- Proteção de rotas autenticadas
+
+### Projeto WEB
+
+- responsividade
+- carrousel com biblioteca keen-slider
+- uso do radix select para escolha do game
+- validação com zod e react-hook-forms
+- adicionada página de anúncios do game selecionado, parecido com a do mobile,
+  com carrousel dos anúncios, modal de conectar e botão de copiar o discord para
+  o clipboard.
+- autenticação com o Discord usando context API do React
+- renderização de componentes conforme autenticação
+- menu de login do tipo dropdown com uso do radix ui
+- substituído o alert do javascript por toast do radix ui
+
 ## 🖼️ Imagens do projeto 👀
 
-Projeto web - Homepage (milha extra com carrossel de games):
+Projeto web - Homepage (milha extra com carrossel de games e Menu dropdown área de login):
 
 <img src="https://raw.githubusercontent.com/rodolfoHOk/portfolio-img/main/images/nlw-esports-01.png" alt="NLW eSports Imagem 01" width="450"/>
 
-Projeto web - Modal publicar anúncio (milha extra com validação dos campos):
+Projeto web - Modal publicar anúncio (milha extra com validação dos campos e discord do usuário logado):
 
 <img src="https://raw.githubusercontent.com/rodolfoHOk/portfolio-img/main/images/nlw-esports-02.png" alt="NLW eSports Imagem 02" width="450"/>
 
@@ -52,6 +78,22 @@ Projeto web - Modal de conectar com discord copiado para o clipboard (milha extr
 Projeto web - Página de anúncios do game selecionado quando não há anúncios (milha extra nova página):
 
 <img src="https://raw.githubusercontent.com/rodolfoHOk/portfolio-img/main/images/nlw-esports-07.png" alt="NLW eSports Imagem 07" width="450"/>
+
+Projeto web - Menu dropdown área de login aberto quando não há usuário logado:
+
+<img src="https://raw.githubusercontent.com/rodolfoHOk/portfolio-img/main/images/nlw-esports-16.png" alt="NLW eSports Imagem 16" width="450"/>
+
+Projeto web - Página de login:
+
+<img src="https://raw.githubusercontent.com/rodolfoHOk/portfolio-img/main/images/nlw-esports-17.png" alt="NLW eSports Imagem 17" width="450"/>
+
+Projeto web - Menu dropdown área de login fechado quando há usuário logado:
+
+<img src="https://raw.githubusercontent.com/rodolfoHOk/portfolio-img/main/images/nlw-esports-18.png" alt="NLW eSports Imagem 18" width="450"/>
+
+Projeto web - Menu dropdown área de login aberto quando há usuário logado:
+
+<img src="https://raw.githubusercontent.com/rodolfoHOk/portfolio-img/main/images/nlw-esports-19.png" alt="NLW eSports Imagem 19" width="450"/>
 
 Projeto web - Responsividade da Homepage (milha extra responsividade):
 
@@ -84,7 +126,6 @@ Projeto mobile - Tela Game:
 Projeto mobile - Modal conectar:
 
 <img src="https://raw.githubusercontent.com/rodolfoHOk/portfolio-img/main/images/nlw-eSports-15.jpg" alt="NLW eSports Imagem 15" width="250"/>
-
 
 ## 🔗 Links para os Readme.md dos projetos do evento✨
 
